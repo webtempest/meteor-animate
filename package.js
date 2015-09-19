@@ -2,7 +2,7 @@ Package.describe({
   name: 'tempest:animations',
   version: '0.0.1',
   summary: 'Animate stuff in Meteor',
-  git: '',
+  git: 'https://github.com/webtempest/meteor-animate.git',
   documentation: 'README.md'
 });
 
