@@ -1,12 +1,19 @@
 # Meteor Animate
 
-Transition blaze templates. Animate any element. Imports [Animate.css](https://github.com/daneden/animate.css) under the hood (~50kb minified sorry).
+Transition blaze templates. Animate any element. Imports [Animate.css](https://github.com/daneden/animate.css) under the hood (~50kb minified).
 
 [Check out the animations here!](https://daneden.github.io/animate.css/)
 
 ## Usage
 
-### Animations
+`meteor add webtempest:animate`
+
+You have two types of animations:
+
+1. Static Animations - when you want to make a single static element bounce or something
+2. Transitions - to make elements disappear/appear in a fancy way (slide in, fade in, etc)
+
+### Static Animations
 
 ```html
 {{#animate type="rubberBand" delay="200"}}
