@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'tempest:animations',
+  name: 'webtempest:animate',
   version: '0.0.1',
   summary: 'Animate stuff in Meteor',
   git: 'https://github.com/webtempest/meteor-animate.git',
@@ -9,7 +9,6 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
   api.use('coffee:script');
-  api.use('stylus');
   api.use('templating');
   api.addFiles([
     'transition.html',
