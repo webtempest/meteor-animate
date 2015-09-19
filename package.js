@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
-  api.use('coffee:script');
+  api.use('coffeescript');
   api.use('templating');
   api.addFiles([
     'transition.html',
