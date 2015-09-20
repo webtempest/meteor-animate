@@ -4,7 +4,7 @@ Easily perform CSS3 animations and transitions in Meteor.
 
 Imports [Animate.css](https://github.com/daneden/animate.css) under the hood.
 
-[Demo](http://animate-demo.meteor.com/one)
+[Demo](http://animate-demo.meteor.com/one) ([Source with Iron Router](https://github.com/webtempest/meteor-animate-demo-iron-router), [Source with Flow Router](https://github.com/webtempest/meteor-animate-demo-flow-router))
 
 [See all possible animations here](https://daneden.github.io/animate.css/)
 
