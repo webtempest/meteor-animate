@@ -49,9 +49,57 @@ Use transitions for elements that hide/appear.
 </ul>
 ```
 
-Note that the transition rules live in the parent element of wherever `{{#transition}}` sits. So in the above case the 'zoomIn' and 'bounceOut' rules will live in the top `<ul>` element, which kind of manages it's children. Every time a new `<li>` is inserted it asks the parent `<ul>` what animation to use - and uses it.
-
 The class name `animated out` on the `<li>` is optional, but without it the `in` animation won't work when the page first loads.
+
+Note that the transition rules live in the parent element of wherever `{{#transition}}` sits. So in the above case the 'zoomIn' and 'bounceOut' rules will live in the top `<ul>` element, which manages it's children. Every time a new `<li>` is inserted it asks the parent `<ul>` what animation to use - and uses it.
+
+**Important!** This means if you have something like this:
+
+```html
+<div>
+  <ul>
+    <li><a href="/one">View 1</a></li>
+    <li><a href="/two">View 2</a></li>
+  </ul>
+
+  {{#transition in="bounceIn" out="bounceOut"}}
+    {{> yield}}
+  {{/transition}}
+</div>
+```
+
+The parent of `{{#transition}}` is the `<div>` at the top. But the `<div>` is ALSO the parent of the `<ul>` element. This is bad because the `<ul>` element will now transition too! To prevent this we can do two things.
+
+Option 1: Wrap `{{#transition}}` in an element to give it a parent:
+
+```html
+<div>
+  <ul>
+    <li><a href="/one">View 1</a></li>
+    <li><a href="/two">View 2</a></li>
+  </ul>
+  <div>
+    {{#transition in="bounceIn" out="bounceOut"}}
+      {{> yield}}
+    {{/transition}}
+  </div>
+</div>
+```
+
+Option 2: Use the `wrap` option for `{{#transition}}`, which I programmed to do the exact same as Option 1, but keeps your code cleaner:
+
+```html
+<div>
+  <ul>
+    <li><a href="/one">View 1</a></li>
+    <li><a href="/two">View 2</a></li>
+  </ul>
+
+  {{#transition wrap="true" in="bounceIn" out="bounceOut"}}
+    {{> yield}}
+  {{/transition}}
+</div>
+```
 
 `in` possibilities:
 

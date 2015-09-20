@@ -11,6 +11,11 @@ class Transitions
     @opt = _.defaults options, defaults
     @opt.insertTimeout = @getInsertTimeout()
     @opt.removeTimeout = @getRemoveTimeout()
+    @opt.parentNode._uihooks = @createHooks()
+
+    self = @
+    _.each $(@opt.parentNode).find('.animated'), (item) ->
+      self.insertElement(item, null, true)
 
   getInsertTimeout: ->
     switch @opt.onScreenClass
@@ -45,7 +50,6 @@ class Transitions
 
 
     if self.transitioning
-      console.log 'trans'
       Meteor.setTimeout insert, self.opt.removeTimeout
     else
       insert()
@@ -77,17 +81,17 @@ Template.transition.onRendered ->
   transitionIn = @data?.in
   transitionOut = @data?.out
 
+  if @$('>').first().hasClass('transition-wrapper')
+    parentNode = @$('>').first()[0]
+  else
+    parentNode = @firstNode?.parentNode
+
   params =
     onScreenClass: transitionIn
     offScreenClass: transitionOut
-    parentNode: @firstNode?.parentNode
+    parentNode: parentNode
 
   transitions = new Transitions(params)
-
-  @firstNode?.parentNode?._uihooks = transitions.createHooks()
-
-  _.each @findAll('.animated'), (item) ->
-    transitions.insertElement(item, null, true)
 
 Template.transition.onDestroyed ->
   @firstNode?.parentNode?._uihooks = null
