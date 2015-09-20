@@ -2,7 +2,9 @@
 
 Transition blaze templates. Animate any element. Imports [Animate.css](https://github.com/daneden/animate.css) under the hood (~50kb minified).
 
-[Check out the animations here!](https://daneden.github.io/animate.css/)
+[Demo](http://animate-demo.meteor.com/one)
+
+[See all possible animations here](https://daneden.github.io/animate.css/)
 
 ## Usage
 

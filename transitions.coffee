@@ -45,9 +45,7 @@ class Transitions
       $node.width()
       $node.removeClass(self.opt.hiddenClass)
       $node.addClass(self.opt.onScreenClass)
-
       $node.one ENDTRANSITION, finish
-
 
     if self.transitioning
       Meteor.setTimeout insert, self.opt.removeTimeout

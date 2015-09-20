@@ -1,10 +1,11 @@
 Template.animate.onRendered ->
   self = @
+  $node = @$('>').first()
   animation = self.data?.type || 'bounce'
   delay = self.data?.delay && parseInt(self.data.delay) || 200
 
   animate = ->
-    $(self.firstNode.nextSibling).addClass("animated #{animation}")
+    $node.addClass("animated #{animation}")
 
   if delay
     Meteor.setTimeout animate, delay
