@@ -30,7 +30,7 @@ class Transitions
     self = @
     $node = $(node)
     $parent = $(self.opt.parentNode)
-    $node.addClass(self.opt.hiddenClass)
+    $node.addClass("#{self.opt.animateClass} #{self.opt.hiddenClass}")
     $(self.opt.parentNode).append($node)
 
     finish = (e) ->
@@ -38,13 +38,14 @@ class Transitions
 
     insert = ->
       $node.width()
-      $node.addClass(self.opt.animateClass)
       $node.removeClass(self.opt.hiddenClass)
       $node.addClass(self.opt.onScreenClass)
 
       $node.one ENDTRANSITION, finish
 
+
     if self.transitioning
+      console.log 'trans'
       Meteor.setTimeout insert, self.opt.removeTimeout
     else
       insert()
