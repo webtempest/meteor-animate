@@ -1,6 +1,8 @@
 # Meteor Animate
 
-Transition blaze templates. Animate any element. Imports [Animate.css](https://github.com/daneden/animate.css) under the hood (~50kb minified).
+Easily perform CSS3 animations and transitions in Meteor. 
+
+Imports [Animate.css](https://github.com/daneden/animate.css) under the hood.
 
 [Demo](http://animate-demo.meteor.com/one)
 
