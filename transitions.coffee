@@ -36,13 +36,15 @@ class Transitions
     $node = $(node)
     $parent = $(self.opt.parentNode)
     $node.addClass("#{self.opt.animateClass} #{self.opt.hiddenClass}")
-    $(self.opt.parentNode).append($node)
+    $node.attr('hidden', true)
+    $(next).before($node)
 
     finish = (e) ->
       $node.removeClass(self.opt.onScreenClass)
 
     insert = ->
       $node.width()
+      $node.attr('hidden', false)
       $node.removeClass(self.opt.hiddenClass)
       $node.addClass(self.opt.onScreenClass)
       $node.one ENDTRANSITION, finish
