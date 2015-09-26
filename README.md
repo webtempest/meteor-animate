@@ -53,6 +53,8 @@ Use transitions for elements that hide/appear.
 </ul>
 ```
 
+
+
 The class name `animated out` on the `<li>` is optional, but without it the `in` animation won't work when the page first loads.
 
 Note that the transition rules live in the parent element of wherever `{{#transition}}` sits. So in the above case the 'zoomIn' and 'bounceOut' rules will live in the top `<ul>` element, which manages it's children. Every time a new `<li>` is inserted it asks the parent `<ul>` what animation to use - and uses it.
@@ -104,6 +106,52 @@ Option 2: Use the `wrap` option for `{{#transition}}`, which I programmed to do 
   {{/transition}}
 </div>
 ```
+
+#### Transition durations
+
+Here are the duration defaults (animate.css set these, not me). Everything is 1000ms, except:
+
+- hinge: 2000ms
+- bounceIn, bounceOut: 750ms
+- flipOutX, flipOutY: 750ms
+
+To set your own duration, follow the pattern: `transition:duration`. Eg:
+
+```html
+<ul>
+  {{#transition in="zoomIn:500" out="bounceOut:2000"}}
+    {{#each items}}
+      <li class="animated out">{{name}}</li>
+    {{/each}}
+  {{/transition}}
+</ul>
+```
+
+This works by creating a custom CSS class and injecting a new `<style>` element into the page within the parent element. Keep in mind IE 9 and below only allows up to 32 stylesheets. Alternatively you can add your own custom CSS class:
+
+```html
+<ul>
+  {{#transition in="zoomIn" out="bounceOut"}}
+    {{#each items}}
+      <li class="animated your-custom-class out">{{name}}</li>
+    {{/each}}
+  {{/transition}}
+</ul>
+```
+
+```css
+animated.your-custom-class.zoomIn {
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+}
+
+animated.your-custom-class.bounceOut {
+  -webkit-animation-duration: 2000ms;
+  animation-duration: 2000ms;
+}
+```
+
+### Transition possibilities
 
 `in` possibilities:
 
