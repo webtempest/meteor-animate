@@ -18,6 +18,7 @@ class Transitions
 
     # This for when the page first loads
     _.each $(@opt.parentNode).find('.animated'), (item) ->
+      $(item).remove()
       self.insertElement(item, null, true)
 
   setupStyles: ->
