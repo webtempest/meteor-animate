@@ -107,6 +107,32 @@ Option 2: Use the `wrap` option for `{{#transition}}`, which I programmed to do 
 </div>
 ```
 
+#### Template level subscriptions
+
+If you are using template level subscriptions like this:
+
+```js
+Template.home.onCreated(function(){
+  this.subscribe('items');
+});
+```
+
+Then make sure you wrap your animated database items like this:
+
+```html
+<ul>
+  {{#if Template.subscriptionsReady}}
+    {{#transition in="zoomIn" out="bounceOut"}}
+      {{#each items}}
+        <li class="animated out">{{name}}</li>
+      {{/each}}
+    {{/transition}}
+  {{/if}}
+</ul>
+```
+
+Otherwise you get some weird double rendering issues.
+
 #### Transition durations
 
 Here are the duration defaults (animate.css set these, not me). Everything is 1000ms, except:

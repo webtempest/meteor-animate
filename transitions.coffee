@@ -17,7 +17,7 @@ class Transitions
     @setupStyles()
 
     # This for when the page first loads
-    _.each $(@opt.parentNode).find('.animated'), (item) ->
+    _.each $(@opt.parentNode).find('.animated.out'), (item) ->
       self.insertElement(item, null, true)
 
   setupStyles: ->
@@ -54,6 +54,7 @@ class Transitions
       else 1000
 
   insertElement: (node, next, firstTime = false) ->
+    node.setAttribute('inserting', true)
     self = @
     $node = $(node)
     $parent = $(self.opt.parentNode)
@@ -63,6 +64,7 @@ class Transitions
 
     finish = (e) ->
       $node.removeClass(self.opt.onScreenClass)
+      node.setAttribute('inserting', false)
 
     insert = ->
       $node.width()
@@ -71,8 +73,8 @@ class Transitions
       $node.addClass(self.opt.onScreenClass)
       $node.one ENDTRANSITION, finish
 
-    if self.transitioning
-      Meteor.setTimeout insert, self.opt.removeTimeout
+    if node.getAttribute('removing')
+      $node.one ENDTRANSITION, insert
     else
       insert()
   
@@ -82,18 +84,17 @@ class Transitions
     self = @
     $node.addClass(self.opt.animateClass)
     remove = (e) ->
-      self.transitioning = false
+      node.setAttribute('removing', false)
       $node.remove()
 
-    if self.opt.offScreenClass
+    if self.opt.offScreenClass  and !node.getAttribute('inserting')
       $node.addClass(self.opt.offScreenClass)
-      self.transitioning = true
+      node.setAttribute('removing', true)
       $node.one ENDTRANSITION, remove
     else
       remove()
 
   createHooks: ->
-    transitioning: false
     opt: @opt
     insertElement: @insertElement
     removeElement: @removeElement
