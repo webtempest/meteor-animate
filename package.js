@@ -1,6 +1,6 @@
 Package.describe({
   name: 'webtempest:animate',
-  version: '0.1.8',
+  version: '0.1.9',
   summary: 'Easily perform CSS animations and transitions in Meteor',
   git: 'https://github.com/webtempest/meteor-animate.git',
   documentation: 'README.md'

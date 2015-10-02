@@ -18,7 +18,7 @@ class Transitions
 
     # This for when the page first loads
     _.each $(@opt.parentNode).find('.animated.out'), (item) ->
-      self.insertElement(item, null, true)
+      self.insertElement(item, null)
 
   setupStyles: ->
     if @opt.inDuration or @opt.outDuration
@@ -53,8 +53,7 @@ class Transitions
       when 'flipOutY' then 750
       else 1000
 
-  insertElement: (node, next, firstTime = false) ->
-    node.setAttribute('inserting', true)
+  insertElement: (node, next) ->
     self = @
     $node = $(node)
     $parent = $(self.opt.parentNode)
@@ -73,8 +72,8 @@ class Transitions
       $node.addClass(self.opt.onScreenClass)
       $node.one ENDTRANSITION, finish
 
-    if node.getAttribute('removing')
-      $node.one ENDTRANSITION, insert
+    if self.removing
+      Meteor.setTimeout insert, self.opt.removeTimeout
     else
       insert()
   
@@ -84,12 +83,12 @@ class Transitions
     self = @
     $node.addClass(self.opt.animateClass)
     remove = (e) ->
-      node.setAttribute('removing', false)
+      self.removing = false
       $node.remove()
 
-    if self.opt.offScreenClass  and !node.getAttribute('inserting')
+    if self.opt.offScreenClass
       $node.addClass(self.opt.offScreenClass)
-      node.setAttribute('removing', true)
+      self.removing = true
       $node.one ENDTRANSITION, remove
     else
       remove()
