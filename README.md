@@ -1,6 +1,6 @@
 # Meteor Animate
 
-Easily perform CSS3 animations and transitions in Meteor. 
+Easily perform CSS3 animations and transitions in Meteor. [Video tutorial here](http://nebula.blue/video/meteor-animate-package).
 
 Imports [Animate.css](https://github.com/daneden/animate.css) under the hood.
 
@@ -41,7 +41,7 @@ You have two types of animations:
 
 ### Transitions
 
-Use transitions for elements that hide/appear. 
+Use transitions for elements that hide/appear.
 
 ```html
 <ul>
